@@ -7,6 +7,12 @@
 </div>
 
 <div class="mt-4">
+    @if ($message = Session::get('success'))
+    <div class="alert alert-success" role="alert">
+        {{ $message }}
+    </div>
+    @endif
+
     @forelse ($posts as $post)
     <div class="col mt-3">
         <div class="card">
@@ -17,9 +23,16 @@
             </div>
             <div class="card-footer">
                 <div>
-                    <a href="{{ route('posts.show', $post->id) }}" class="btn btn-success">Details</a>
-                    <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning">Edit</a>
-                    <a href="{{ route('posts.destroy', $post->id) }}" class="btn btn-danger">Delete</a>
+                    <form action="{{ route('posts.destroy', $post->id) }}" method="post">
+                        @csrf
+                        @method('DELETE')
+
+                        <a href="{{ route('posts.show', $post->id) }}" class="btn btn-success btn-sm">Details</a>
+                        <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-warning btn-sm">Edit</a>
+
+                        <button type="submit" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Do you want to delete this post?');">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>
