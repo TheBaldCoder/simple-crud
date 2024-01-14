@@ -1,4 +1,4 @@
-<h1>Simple CRUD</h1>
+<h1>Simple CRUD (Laravel)</h1>
 
 ![Alt text](posts.png)
 
